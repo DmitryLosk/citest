@@ -29,19 +29,26 @@ pipeline {
         }
         stage('Archive Results') {
             steps {
+                script {
 // Архивирование результатов
-                if (fileExists('result.txt')){
-                     archiveArtifacts artifacts: 'result.txt', allowEmptyArchive: true
+                    if (fileExists('result.txt')) {
+                        archiveArtifacts artifacts: 'result.txt', allowEmptyArchive: true
+                    } else {
+                        echo 'No results'
+                    }
                 }
-
             }
         }
     }
     post {
         always {
+            script {
 // Вывод результатов в консоль
-            if (fileExists('result.txt')){
-                echo readFile('result.txt')
+                if (fileExists('result.txt')) {
+                    echo readFile('result.txt')
+                } else {
+                    echo 'No results'
+                }
             }
         }
     }
