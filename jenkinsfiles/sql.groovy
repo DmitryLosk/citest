@@ -30,7 +30,10 @@ pipeline {
         stage('Archive Results') {
             steps {
 // Архивирование результатов
-                archiveArtifacts artifacts: 'result.txt', allowEmptyArchive: true
+                if (fileExists('result.txt')){
+                     archiveArtifacts artifacts: 'result.txt', allowEmptyArchive: true
+                }
+
             }
         }
     }
