@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
 // Выполнение SQL скриптов
-                    sh "apt install mysql-server"
+                    sh "sudo apt install mysql-server"
                     sh """
                     mysql --user=${DB_USER} --host=${DB_HOST} --port=${DB_PORT} --database=${DB_NAME} < ${DB_FILE} > result.txt
 cat result.txt
