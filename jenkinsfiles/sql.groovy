@@ -21,7 +21,7 @@ pipeline {
 // Выполнение SQL скриптов
                     sh "sudo apt install mysql-server"
                     sh """
-                    mysql --user=${DB_USER} --host=${DB_HOST} --port=${DB_PORT} --database=${DB_NAME} < ${DB_FILE} > result.txt
+                    mysql --user=${DB_USER} --host=${DB_HOST} --port=${DB_PORT} --database=${DB_NAME} < $WORKSPACE/jenkinsfiles/${DB_FILE} > result.txt
                     cat result.txt
 """
                 }
