@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent {node('agent')}
     environment {
         DB_FILE = 'scripts.sql'
         DB_HOST = 'mysql-rfam-public.ebi.ac.uk'
