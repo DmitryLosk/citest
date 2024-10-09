@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DB_FILE = '/sql/scripts.sql'
+        DB_FILE = 'scripts.sql'
         DB_HOST = 'mysql-rfam-public.ebi.ac.uk'
         DB_USER = 'rfamro'
         DB_PORT = '4497'
@@ -22,7 +22,7 @@ pipeline {
                     sh "sudo apt install mysql-server"
                     sh """
                     mysql --user=${DB_USER} --host=${DB_HOST} --port=${DB_PORT} --database=${DB_NAME} < ${DB_FILE} > result.txt
-cat result.txt
+                    cat result.txt
 """
                 }
             }
@@ -37,7 +37,9 @@ cat result.txt
     post {
         always {
 // Вывод результатов в консоль
-            echo readFile('result.txt')
+            if (fileExists('result.txt')){
+                echo readFile('result.txt')
+            }
         }
     }
 }
